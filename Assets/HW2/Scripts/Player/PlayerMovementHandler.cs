@@ -5,13 +5,19 @@ using UnityEngine.InputSystem;
 
 namespace HW2
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovementHandler : MonoBehaviour
     {
         [SerializeField] private NavMeshAgent agent;
-        [SerializeField] private float destinationOffset;
+        public PlayerSettings PlayerSettings { get; set; }
 
         private Vector3 _destiantion;
         private bool _isMoving = false;
+
+        private void Awake()
+        {
+            agent.speed = PlayerSettings.MovementSpeed;
+            agent.acceleration = PlayerSettings.AccelerationSpeed;
+        }
 
         private void Update()
         {
@@ -43,7 +49,7 @@ namespace HW2
         private bool WasDestinationReached()
         {
             Vector3 playerGroundPosition = new Vector3(transform.position.x, _destiantion.y, transform.position.z);
-            return (destinationOffset * destinationOffset) >= (_destiantion - playerGroundPosition).sqrMagnitude;
+            return PlayerSettings.DestinationOffset >= (_destiantion - playerGroundPosition).sqrMagnitude;
         }
 
         public void StopMoving()

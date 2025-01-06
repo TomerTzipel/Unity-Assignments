@@ -24,7 +24,6 @@ namespace HW2
 
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("collision");
             OnBulletHit.Invoke(new BulletCollisionArgs { damage = bulletSettings.BulletDamage, bullet = this, objectHit = collision.gameObject });
         }
     }

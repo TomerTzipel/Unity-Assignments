@@ -6,7 +6,7 @@ namespace HW1
     public class PlayerMovement : AgentMovement
     {
 
-        [SerializeField] private float destinationOffset;
+        [SerializeField] private PlayerSettings playerSettings;
 
         private Vector3 _destiantion;
         private bool _isMoving = false;
@@ -48,7 +48,7 @@ namespace HW1
         private bool WasDestinationReached()
         {
             Vector3 playerGroundPosition = new Vector3(transform.position.x, _destiantion.y, transform.position.z);
-            return (destinationOffset * destinationOffset) >= (_destiantion - playerGroundPosition).sqrMagnitude;
+            return Mathf.Pow(playerSettings.DestinationOffset,2) >= (_destiantion - playerGroundPosition).sqrMagnitude;
         }
     }
 

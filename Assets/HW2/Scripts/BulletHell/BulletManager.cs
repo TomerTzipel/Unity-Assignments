@@ -1,30 +1,32 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 namespace HW2
 {
     public class BulletManager : MonoBehaviour
     {
         [SerializeField] private List<Gun> guns;
+        [SerializeField] private PlayerManager playerManager;
 
         private void Awake()
         {
             foreach (Gun gun in guns)
             {
-                gun.OnBulletSpawn += SubscribeToBullet;
+                gun.OnBulletSpawn += OnBulletSpawn;
             }
+
+           
         }
 
-        public void SubscribeToBullet(Bullet bullet)
+        private void OnBulletSpawn(Bullet bullet)
         {
             bullet.OnBulletHit += DestroyBullet;
+            bullet.OnBulletHit += playerManager.CheckForPlayerHit;
         }
 
         private void DestroyBullet(BulletCollisionArgs args)
         {
-            //Check if the target hit is the player
-            //Tell player he took damage
-            Debug.Log("Destroy bullet");
             Destroy(args.bullet.gameObject);
         }
     }
