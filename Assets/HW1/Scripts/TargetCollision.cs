@@ -1,45 +1,48 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-
-public class TargetCollision : MonoBehaviour
+namespace HW1
 {
-    [SerializeField] TMP_Text message;
-    [SerializeField] float messageDuration;
-
-    private bool _wasReached = false;
-
-    private void OnTriggerEnter(Collider other)
+    public class TargetCollision : MonoBehaviour
     {
-        if(_wasReached) return;
-       
-        if (other.CompareTag("Player"))
+        [SerializeField] TMP_Text message;
+        [SerializeField] float messageDuration;
+
+        private bool _wasReached = false;
+
+        private void OnTriggerEnter(Collider other)
         {
-            ShowMessage("YOU WON");
-            _wasReached = true;
+            if (_wasReached) return;
+
+            if (other.CompareTag("Player"))
+            {
+                ShowMessage("YOU WON");
+                _wasReached = true;
+            }
+
+            if (other.CompareTag("AI"))
+            {
+                ShowMessage("AI WON");
+                _wasReached = true;
+            }
         }
 
-        if (other.CompareTag("AI"))
+        private void ShowMessage(string text)
         {
-            ShowMessage("AI WON");
-            _wasReached = true;
+            message.text = text;
+            message.gameObject.SetActive(true);
+            StartCoroutine(Countdown());
+        }
+        private void HideMessage()
+        {
+            message.gameObject.SetActive(false);
+        }
+
+        private IEnumerator Countdown()
+        {
+            yield return new WaitForSeconds(messageDuration);
+            HideMessage();
         }
     }
-
-    private void ShowMessage(string text)
-    {
-        message.text = text;
-        message.gameObject.SetActive(true);
-        StartCoroutine(Countdown());
-    }
-    private void HideMessage()
-    {
-        message.gameObject.SetActive(false);
-    }
-
-    private IEnumerator Countdown()
-    {
-        yield return new WaitForSeconds(messageDuration);
-        HideMessage();
-    } 
 }
+

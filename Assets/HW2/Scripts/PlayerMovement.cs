@@ -1,21 +1,17 @@
+
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-namespace HW1
+namespace HW2
 {
-    public class PlayerMovement : AgentMovement
+    public class PlayerMovement : MonoBehaviour
     {
-
+        [SerializeField] private NavMeshAgent agent;
         [SerializeField] private float destinationOffset;
 
         private Vector3 _destiantion;
         private bool _isMoving = false;
-
-        private void Awake()
-        {
-            agent.SetAreaCost(3, 2);
-            agent.SetAreaCost(10, 2);
-        }
 
         private void Update()
         {
@@ -23,7 +19,7 @@ namespace HW1
 
             if (WasDestinationReached())
             {
-                _isMoving = false;
+                StopMoving();
                 agent.ResetPath();
             }
         }
@@ -34,8 +30,7 @@ namespace HW1
 
             int groundLayerask = LayerMask.GetMask("Ground");
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 80f, groundLayerask))
+            if (Physics.Raycast(ray, out RaycastHit hit, 80f, groundLayerask))
             {
                 _destiantion = hit.point;
                 Debug.DrawLine(ray.origin, _destiantion);
@@ -50,8 +45,11 @@ namespace HW1
             Vector3 playerGroundPosition = new Vector3(transform.position.x, _destiantion.y, transform.position.z);
             return (destinationOffset * destinationOffset) >= (_destiantion - playerGroundPosition).sqrMagnitude;
         }
+
+        public void StopMoving()
+        {
+            _isMoving = false;
+        }
     }
-
-
-
 }
+

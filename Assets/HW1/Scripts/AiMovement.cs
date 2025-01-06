@@ -1,12 +1,15 @@
 using UnityEngine;
-
-public class AiMovement : AgentMovement
+namespace HW1
 {
-    [SerializeField] GameObject target;
-
-    private void Awake()
+    public class AiMovement : AgentMovement
     {
-        agent.SetDestination(target.transform.position);
-    }
+        [SerializeField] GameObject target;
 
+        private void Awake()
+        {
+            agent.SetDestination(target.transform.position);
+        }
+
+    }
 }
+

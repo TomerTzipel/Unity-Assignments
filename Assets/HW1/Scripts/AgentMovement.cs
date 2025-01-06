@@ -1,33 +1,36 @@
 using UnityEngine;
 using UnityEngine.AI;
-
-public class AgentMovement : MonoBehaviour
+namespace HW1
 {
-    [SerializeField] protected NavMeshAgent agent;
-
-    private void OnTriggerEnter(Collider other)
+    public class AgentMovement : MonoBehaviour
     {
-        if (other.CompareTag("Mud"))
+        [SerializeField] protected NavMeshAgent agent;
+
+        private void OnTriggerEnter(Collider other)
         {
-            agent.speed *= 0.75f;
+            if (other.CompareTag("Mud"))
+            {
+                agent.speed *= 0.75f;
+            }
+
+            if (other.CompareTag("SpeedBoost"))
+            {
+                agent.speed *= 1.2f;
+            }
         }
 
-        if (other.CompareTag("SpeedBoost"))
+        private void OnTriggerExit(Collider other)
         {
-            agent.speed *= 1.2f;
-        }
-    }
+            if (other.CompareTag("Mud"))
+            {
+                agent.speed /= 0.75f;
+            }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Mud"))
-        {
-            agent.speed /= 0.75f;
-        }
-
-        if (other.CompareTag("SpeedBoost"))
-        {
-            agent.speed /= 1.2f;
+            if (other.CompareTag("SpeedBoost"))
+            {
+                agent.speed /= 1.2f;
+            }
         }
     }
 }
+

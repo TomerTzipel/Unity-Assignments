@@ -1,41 +1,45 @@
 using System.Collections;
 using UnityEngine;
 
-
-public enum Axis { x,y,z}
-public class ObstacleMovement : MonoBehaviour
+namespace HW1
 {
-    [SerializeField] private float _speed;
-    [SerializeField] private float _duration;
-    [SerializeField] private Axis _axis;
-    [SerializeField] private float _startDirection;
-    [SerializeField] private Rigidbody _rb;
-
-    private Vector3 _direction;
-
-    void Awake()
+    public enum Axis { x, y, z }
+    public class ObstacleMovement : MonoBehaviour
     {
-        if (_axis == Axis.x)
+        [SerializeField] private float _speed;
+        [SerializeField] private float _duration;
+        [SerializeField] private Axis _axis;
+        [SerializeField] private float _startDirection;
+        [SerializeField] private Rigidbody _rb;
+
+        private Vector3 _direction;
+
+        void Awake()
         {
-            _direction = new Vector3(_startDirection, 0f, 0f);
+            if (_axis == Axis.x)
+            {
+                _direction = new Vector3(_startDirection, 0f, 0f);
+            }
+            if (_axis == Axis.z)
+            {
+                _direction = new Vector3(0f, 0f, _startDirection);
+            }
+            StartCoroutine(ChangeDirectionTimer());
         }
-        if (_axis == Axis.z)
+
+        void FixedUpdate()
         {
-            _direction = new Vector3(0f, 0f, _startDirection);
+            Vector3 move = _speed * Time.fixedDeltaTime * _direction;
+            _rb.MovePosition(transform.position + move);
         }
-        StartCoroutine(ChangeDirectionTimer());
-    }
 
-    void FixedUpdate()
-    {
-        Vector3 move = _speed * Time.fixedDeltaTime * _direction;
-        _rb.MovePosition(transform.position + move);
-    }
-
-    private IEnumerator ChangeDirectionTimer()
-    {
-        yield return new WaitForSeconds(_duration);
-        _direction *= -1f;
-        StartCoroutine(ChangeDirectionTimer());
+        private IEnumerator ChangeDirectionTimer()
+        {
+            yield return new WaitForSeconds(_duration);
+            _direction *= -1f;
+            StartCoroutine(ChangeDirectionTimer());
+        }
     }
 }
+
+
