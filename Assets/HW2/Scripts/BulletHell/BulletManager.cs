@@ -14,9 +14,7 @@ namespace HW2
             foreach (Gun gun in guns)
             {
                 gun.OnBulletSpawn += OnBulletSpawn;
-            }
-
-           
+            }    
         }
 
         private void OnBulletSpawn(Bullet bullet)
