@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerFlashHandler : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
+
+    public UnityEvent OnPlayerFlash;
 
     private bool _isFlashAvailable = true;
     public PlayerSettings PlayerSettings { get; set; }
@@ -13,6 +16,8 @@ public class PlayerFlashHandler : MonoBehaviour
     public void Flash()
     {
         if (!_isFlashAvailable) return;
+
+        OnPlayerFlash.Invoke();
         StartCoroutine(StartFlashCD(PlayerSettings.FlashCD));
 
         Vector3 position = transform.position;

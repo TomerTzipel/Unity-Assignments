@@ -17,8 +17,6 @@ public class PlayerManager : MonoBehaviour
 
     public event UnityAction<BarArgs> OnPlayerLoad;
 
-    public UnityEvent OnPlayerFlash;
-
     public event UnityAction<int> OnPlayerTookDamage { add { playerHealthHandler.OnPlayerTookDamage += value; } remove { playerHealthHandler.OnPlayerTookDamage -= value; } }
     public event UnityAction OnPlayerDeath { add { playerHealthHandler.OnPlayerDeath += value; } remove { playerHealthHandler.OnPlayerDeath -= value; } }
     void Awake()
@@ -33,8 +31,7 @@ public class PlayerManager : MonoBehaviour
         OnPlayerHit.AddListener(OnPlayerHitAction);
         OnPlayerDeath += PlayerDeath;
 
-        OnPlayerFlash.AddListener(playerFlashHandler.Flash);
-        OnPlayerFlash.AddListener(playerMovementHandler.StopMoving);
+        playerFlashHandler.OnPlayerFlash.AddListener(playerMovementHandler.StopMoving);
     }
 
     public void CheckForPlayerHit(BulletCollisionArgs args)
@@ -58,7 +55,6 @@ public class PlayerManager : MonoBehaviour
     public void OnFlashCommand(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-
-        OnPlayerFlash.Invoke();     
+        playerFlashHandler.Flash();
     }
 }
