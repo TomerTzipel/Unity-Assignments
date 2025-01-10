@@ -8,13 +8,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private PlayerSettings playerSettings;
     [SerializeField] private PlayerMovementHandler playerMovementHandler;
     [SerializeField] private PlayerHealthHandler playerHealthHandler;
+    [SerializeField] private PlayerFlashHandler playerFlashHandler;
     [SerializeField] private UIManager uiManager;
-
 
     public UnityEvent<int> OnPlayerHit;
     public event UnityAction<int> OnPlayerHitAction;
-
-    
 
     void Awake()
     {

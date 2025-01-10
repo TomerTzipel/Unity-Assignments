@@ -22,7 +22,7 @@ public class PlayerHealthHandler : MonoBehaviour
     {
         if (_isInvul) return;
 
-        StartCoroutine(ActivateInvul());
+        StartCoroutine(ActivateInvul(PlayerSettings.InvulDuration));
 
         _currentHP -= damage;
         Debug.Log(_currentHP);
@@ -37,12 +37,12 @@ public class PlayerHealthHandler : MonoBehaviour
         OnPlayerTookDamage.Invoke(damage);
     }
 
-    private IEnumerator ActivateInvul()
+    private IEnumerator ActivateInvul(float duration)
     {
         _isInvul = true;
         meshRenderer.material = PlayerSettings.HurtMaterial;
 
-        yield return new WaitForSeconds(PlayerSettings.InvulDuration);
+        yield return new WaitForSeconds(duration);
 
         _isInvul = false;
         meshRenderer.material = PlayerSettings.PlayerMaterial;
