@@ -3,12 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("UI Elements")]
     [SerializeField] private BarHandler hpBar;
     [SerializeField] private GameObject deathPanel;
+
+    [Header("Needed Managers")]
+    [SerializeField] private PlayerManager playerManager;
 
     private void Awake()
     {
         deathPanel.SetActive(false);
+        playerManager.OnPlayerTookDamage += OnPlayerTakeDamage;
+        playerManager.OnPlayerDeath += OnPlayerDeath;
+        playerManager.OnPlayerLoad += BarValuesSetUp;
     }
     public void BarValuesSetUp(BarArgs barArgs)
     {
@@ -26,7 +33,6 @@ public class UIManager : MonoBehaviour
     }
     public void OnPlayerDeath()
     {
-        Debug.Log("In UI Death");
         deathPanel.SetActive(true);
     }
     public void OnRestartButton()

@@ -26,14 +26,11 @@ namespace HW2
             if (WasDestinationReached())
             {
                 StopMoving();
-                agent.ResetPath();
             }
         }
 
-        public void OnMoveCommand(InputAction.CallbackContext context)
+        public void Move()
         {
-            if (!context.performed) return;
-
             int groundLayerask = LayerMask.GetMask("Ground");
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out RaycastHit hit, 80f, groundLayerask))
@@ -55,6 +52,7 @@ namespace HW2
         public void StopMoving()
         {
             _isMoving = false;
+            agent.ResetPath();
         }
     }
 }

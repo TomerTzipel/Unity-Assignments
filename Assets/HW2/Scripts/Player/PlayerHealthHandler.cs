@@ -25,12 +25,9 @@ public class PlayerHealthHandler : MonoBehaviour
         StartCoroutine(ActivateInvul(PlayerSettings.InvulDuration));
 
         _currentHP -= damage;
-        Debug.Log(_currentHP);
-        Debug.Log(_currentHP <= 0);
 
         if (_currentHP <= 0)
         {
-            Debug.Log("dead");
             OnPlayerDeath.Invoke();
         }
 
