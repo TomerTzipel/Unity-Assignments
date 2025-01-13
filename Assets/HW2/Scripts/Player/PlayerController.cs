@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerSettings playerSettings;
     [SerializeField] private PlayerMovementHandler playerMovementHandler;
     [SerializeField] private PlayerHealthHandler playerHealthHandler;
     [SerializeField] private PlayerFlashHandler playerFlashHandler;
-
 
     public UnityEvent<int> OnPlayerHit;
     public event UnityAction<int> OnPlayerHitAction;
@@ -25,10 +24,11 @@ public class PlayerManager : MonoBehaviour
         playerHealthHandler.PlayerSettings = playerSettings;
         playerFlashHandler.PlayerSettings = playerSettings;
 
-        OnPlayerLoad.Invoke(new BarArgs { minValue = 0, maxValue = playerSettings.MaxHP, startValue = playerSettings.MaxHP });
+        OnPlayerLoad.Invoke(new BarArgs{startValue = playerSettings.MaxHP, maxValue = playerSettings.MaxHP, minValue = 0 });
 
         OnPlayerHitAction += playerHealthHandler.TakeDamage;
         OnPlayerHit.AddListener(OnPlayerHitAction);
+
         OnPlayerDeath += PlayerDeath;
 
         playerFlashHandler.OnPlayerFlash.AddListener(playerMovementHandler.StopMoving);

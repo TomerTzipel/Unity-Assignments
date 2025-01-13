@@ -4,23 +4,23 @@ using UnityEngine.Events;
 
 namespace HW2
 {
-    public class BulletManager : MonoBehaviour
+    public class BulletsManager : MonoBehaviour
     {
-        [SerializeField] private List<Gun> guns;
-        [SerializeField] private PlayerManager playerManager;
+        [SerializeField] private List<GunHandler> guns;
+        [SerializeField] private PlayerController playerManager;
 
         private void Awake()
         {
-            foreach (Gun gun in guns)
+            foreach (GunHandler gun in guns)
             {
                 gun.OnBulletSpawn += OnBulletSpawn;
             }    
         }
 
-        private void OnBulletSpawn(Bullet bullet)
+        private void OnBulletSpawn(BulletHandler bullet)
         {
-            bullet.OnBulletHit += DestroyBullet;
             bullet.OnBulletHit += playerManager.CheckForPlayerHit;
+            bullet.OnBulletHit += DestroyBullet;
         }
 
         private void DestroyBullet(BulletCollisionArgs args)

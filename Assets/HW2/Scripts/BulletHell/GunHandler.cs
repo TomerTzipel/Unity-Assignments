@@ -4,9 +4,9 @@ using UnityEngine.Events;
 
 namespace HW2
 {
-    public class Gun : MonoBehaviour
+    public class GunHandler : MonoBehaviour
     {
-        public event UnityAction<Bullet> OnBulletSpawn;
+        public event UnityAction<BulletHandler> OnBulletSpawn;
         [SerializeField] Transform spawnPoint;
         [SerializeField] GunSettings gunSettings;
 
@@ -27,7 +27,7 @@ namespace HW2
 
         private void Fire()
         {
-            Bullet bullet = Instantiate(gunSettings.BulletPrefab, spawnPoint.position, Quaternion.identity, transform);
+            BulletHandler bullet = Instantiate(gunSettings.BulletPrefab, spawnPoint.position, Quaternion.identity, transform);
             bullet.Direction = transform.forward;
             OnBulletSpawn.Invoke(bullet);
         }

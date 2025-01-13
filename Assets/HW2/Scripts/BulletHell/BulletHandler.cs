@@ -2,11 +2,10 @@ using UnityEngine;
 using UnityEngine.Events;
 namespace HW2
 {
-    public class Bullet : MonoBehaviour
+    public class BulletHandler : MonoBehaviour
     {
         public event UnityAction<BulletCollisionArgs> OnBulletHit;
 
-        [SerializeField] private Rigidbody rb;
         [SerializeField] private BulletSettings bulletSettings;
         private float _speed;
         public Vector3 Direction { get; set; }
@@ -16,22 +15,21 @@ namespace HW2
             _speed = Random.Range(bulletSettings.MinSpeed, bulletSettings.MaxSpeed);
         }
 
-        void FixedUpdate()
+        void Update()
         {
-            Vector3 move = _speed * Time.fixedDeltaTime * Direction;
-            rb.MovePosition(transform.position + move);
+            transform.Translate(_speed * Time.deltaTime * Direction);
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            OnBulletHit.Invoke(new BulletCollisionArgs { damage = bulletSettings.BulletDamage, bullet = this, objectHit = collision.gameObject });
+            OnBulletHit.Invoke(new BulletCollisionArgs { damage = bulletSettings.BulletDamage, bullet = this, objectHit = other.gameObject });
         }
     }
 
     public struct BulletCollisionArgs
     {
         public int damage;
-        public Bullet bullet;
+        public BulletHandler bullet;
         public GameObject objectHit;
     }
 
