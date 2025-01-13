@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 6740267637750723900}
   - component: {fileID: 6805166346130729193}
   m_Layer: 0
-  m_Name: Player_HP_Bar
+  m_Name: BarPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
   maxHP: 200
-  invulDuration: 0.2
+  invulDuration: 0.6
   movementSpeed: 10
   accelerationSpeed: 100
   destinationOffset: 0.1
