@@ -4,14 +4,13 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerFlashHandler : MonoBehaviour
+public class PlayerFlashHandler : PlayerHandlerScript
 {
     [SerializeField] private NavMeshAgent agent;
 
     public UnityEvent OnPlayerFlash;
 
     private bool _isFlashAvailable = true;
-    public PlayerSettings PlayerSettings { get; set; }
 
     public void Flash()
     {

@@ -2,27 +2,31 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerHealthHandler : MonoBehaviour
+public class PlayerHealthHandler : PlayerHandlerScript
 {
     [SerializeField] private MeshRenderer meshRenderer;
+   
 
     public event UnityAction<int> OnPlayerTookDamage;
     public event UnityAction OnPlayerDeath;
 
     private int _currentHP;
     private bool _isInvul = false;
-    public PlayerSettings PlayerSettings { get; set; }
 
     private void Awake()
     {
         _currentHP = PlayerSettings.MaxHP;
+        playerController.OnPlayerHitAction += TakeDamage;
+
+        playerController.EffectActions[EffectType.Heal] += Heal;
+        playerController.EffectActions[EffectType.Invul] += ActivateInvul;
     }
 
     public void TakeDamage(int damage)
     {
         if (_isInvul) return;
 
-        StartCoroutine(ActivateInvul(PlayerSettings.InvulDuration));
+        ActivateInvul(PlayerSettings.InvulDuration);
 
         _currentHP -= damage;
 
@@ -34,7 +38,23 @@ public class PlayerHealthHandler : MonoBehaviour
         OnPlayerTookDamage.Invoke(damage);
     }
 
-    private IEnumerator ActivateInvul(float duration)
+    private void Heal(float value)
+    {
+        //must recieve float becuase of the event
+        _currentHP += (int)value;
+
+        if (_currentHP > PlayerSettings.MaxHP)
+        {
+            _currentHP = PlayerSettings.MaxHP;
+        }
+    }
+
+    private void ActivateInvul(float duration)
+    {
+        StartCoroutine(InvulDuration(duration));
+    }
+
+    private IEnumerator InvulDuration(float duration)
     {
         _isInvul = true;
         meshRenderer.material = PlayerSettings.HurtMaterial;

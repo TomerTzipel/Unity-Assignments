@@ -1,4 +1,6 @@
+using System.Collections;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,30 +20,37 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        
         deathPanel.SetActive(false);
-        //Subscribe to on player heal
-        //Subscribe to on player shield
-        //Subscribe to on player lose shield
+
+        playerController.OnPlayerLoad += OnPlayerLoad;
         playerController.OnPlayerTookDamage += OnPlayerTakeDamage;
+        playerController.EffectActions[EffectType.Heal] += OnPlayerHeal;
         playerController.OnPlayerDeath += OnPlayerDeath;
-        playerController.OnPlayerLoad += BarValuesSetUp;
+
+        //Move to game manager
+        Time.timeScale = 1f;
+        playerController.EffectActions[EffectType.SlowTime] += OnSlowTime;
 
         _score = 0;
-        UpdateScore(_score);
+        OnUpdateScore(_score);
     }
+
     public void OnRestartButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void UpdateScore(int value)
+    public void OnUpdateScore(int value)
     {
         _score += value;
         scoreText.text = hitCounterText + _score;
     }
-    private void BarValuesSetUp(BarArgs barArgs)
+
+    private void OnPlayerLoad(PlayerSettings playerSettings)
     {
-        hpBar.SetUpSlider(barArgs);
+        BarArgs args = new BarArgs { startValue = playerSettings.MaxHP, maxValue = playerSettings.MaxHP, minValue = 0 };
+        hpBar.SetUpSlider(args);
     }
 
     private void OnPlayerTakeDamage(int value)
@@ -49,13 +58,26 @@ public class UIManager : MonoBehaviour
         hpBar.modifyValue(-value);
     }
 
-    private void OnPlayerHeal(int value)
+    private void OnPlayerHeal(float value)
     {
-        hpBar.modifyValue(value);
+        hpBar.modifyValue((int)value);
     }
     private void OnPlayerDeath()
     {
         deathPanel.SetActive(true);
     }
-   
+
+    //Move to game manager
+    private void OnSlowTime(float duration)
+    {
+        StartCoroutine(SlowTime(duration));
+    }
+
+    private IEnumerator SlowTime(float duration)
+    {
+        Time.timeScale = 0.5f;
+        yield return new WaitForSeconds(duration);
+        Time.timeScale = 1f;
+    }
+
 }

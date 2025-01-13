@@ -7,7 +7,7 @@ namespace HW2
     public class BulletsManager : MonoBehaviour
     {
         [SerializeField] private List<GunHandler> guns;
-        [SerializeField] private PlayerController playerManager;
+        [SerializeField] private PlayerController playerController;
 
         private void Awake()
         {
@@ -19,12 +19,13 @@ namespace HW2
 
         private void OnBulletSpawn(BulletHandler bullet)
         {
-            bullet.OnBulletHit += playerManager.CheckForPlayerHit;
+            bullet.OnBulletHit += playerController.CheckForPlayerHit;
             bullet.OnBulletHit += DestroyBullet;
         }
 
         private void DestroyBullet(BulletCollisionArgs args)
         {
+
             Destroy(args.bullet.gameObject);
         }
     }

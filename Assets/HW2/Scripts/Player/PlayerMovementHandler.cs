@@ -5,10 +5,9 @@ using UnityEngine.InputSystem;
 
 namespace HW2
 {
-    public class PlayerMovementHandler : MonoBehaviour
+    public class PlayerMovementHandler : PlayerHandlerScript
     {
         [SerializeField] private NavMeshAgent agent;
-        public PlayerSettings PlayerSettings { get; set; }
 
         private Vector3 _destiantion;
         private bool _isMoving = false;
