@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 516076152770738593}
   - component: {fileID: 3711626944278875214}
   - component: {fileID: 4369449935810494356}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce940c4d24925844eb1d6f84114f4065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
   agent: {fileID: 8780090574144645297}
 --- !u!114 &3711626944278875214
 MonoBehaviour:
@@ -62,6 +63,7 @@ MonoBehaviour:
   playerSettings: {fileID: 11400000, guid: 9b5f07ce673990b4f9f8b0438fdf1c7b, type: 2}
   playerMovementHandler: {fileID: 516076152770738593}
   playerHealthHandler: {fileID: 4369449935810494356}
+  playerFlashHandler: {fileID: 0}
   OnPlayerHit:
     m_PersistentCalls:
       m_Calls: []
@@ -77,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bc50b46f89531468be9227c4e6b8ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
   meshRenderer: {fileID: 4324441141986524441}
 --- !u!1 &4854308345579311554
 GameObject:
@@ -91,7 +94,7 @@ GameObject:
   - component: {fileID: 2054064658505731649}
   - component: {fileID: 6501798854447705056}
   - component: {fileID: 8780090574144645297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -232,6 +235,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 22a0ca7c-8cf4-403e-9c55-fca3a9f50281
     m_ActionName: 'Player/MouseMove[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ab36d652-0199-49f4-8da2-6a8ffef67ab5
+    m_ActionName: 'Player/Flash[/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -320,7 +327,7 @@ GameObject:
   - component: {fileID: 2424401020836974125}
   - component: {fileID: 8196589791013061231}
   - component: {fileID: 4324441141986524441}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
