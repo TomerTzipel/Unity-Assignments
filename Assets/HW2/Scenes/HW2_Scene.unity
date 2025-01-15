@@ -1757,8 +1757,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e131573d34ea02d438bf87debdef486c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Player>k__BackingField: {fileID: 2140046398}
-  powerUpList: {fileID: 11400000, guid: ef277fa88d3a30741b27552a9df81c62, type: 2}
+  playerController: {fileID: 2140046398}
+  powerUpGenerator: {fileID: 11400000, guid: da5227c1cd08b2343aa04c1882b62f59, type: 2}
   powerUpParent: {fileID: 1489842133}
   spawnArea:
     serializedVersion: 2
@@ -1767,6 +1767,8 @@ MonoBehaviour:
     width: 15.9
     height: 16.9
   spawnRate: 3
+  healSpawnRate: 5
+  slowTimeMultiplier: 0.5
 --- !u!1001 &631363836
 PrefabInstance:
   m_ObjectHideFlags: 0

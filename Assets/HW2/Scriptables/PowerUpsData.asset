@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d6d9d7c851160f47b479afe7207e45c, type: 3}
-  m_Name: SlowTimeData
+  m_Script: {fileID: 11500000, guid: d190656f090651d41afd5f0265a0b8b3, type: 3}
+  m_Name: PowerUpsData
   m_EditorClassIdentifier: 
-  <TimeSlow>k__BackingField: 0.5
-  <Duration>k__BackingField: 5
+  _slowDownDuration: 2
+  _healValue: 30
+  _invincibilityDuration: 3

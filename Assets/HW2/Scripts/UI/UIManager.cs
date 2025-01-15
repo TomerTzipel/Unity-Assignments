@@ -4,80 +4,85 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour
+
+namespace HW2
 {
-    [Header("UI Elements")]
-    [SerializeField] private BarHandler hpBar;
-    [SerializeField] private GameObject deathPanel;
-
-    [SerializeField] private TMP_Text scoreText;
-
-    [Header("Needed Managers")]
-    [SerializeField] private PlayerController playerController;
-
-    private const string hitCounterText = "Score:";
-    private int _score;
-
-    private void Awake()
+    public class UIManager : MonoBehaviour
     {
-        
-        deathPanel.SetActive(false);
+        [Header("UI Elements")]
+        [SerializeField] private BarHandler hpBar;
+        [SerializeField] private GameObject deathPanel;
 
-        playerController.OnPlayerLoad += OnPlayerLoad;
-        playerController.OnPlayerTookDamage += OnPlayerTakeDamage;
-        playerController.EffectActions[EffectType.Heal] += OnPlayerHeal;
-        playerController.OnPlayerDeath += OnPlayerDeath;
+        [SerializeField] private TMP_Text scoreText;
+
+        [Header("Needed Managers")]
+        [SerializeField] private PlayerController playerController;
+
+        private const string hitCounterText = "Score:";
+        private int _score;
+
+        private void Awake()
+        {
+
+            deathPanel.SetActive(false);
+
+            playerController.OnPlayerLoad += OnPlayerLoad;
+            playerController.OnPlayerTookDamage += OnPlayerTakeDamage;
+            playerController.EffectActions[PowerUpType.Heal] += OnPlayerHeal;
+            playerController.OnPlayerDeath += OnPlayerDeath;
+
+            //Move to game manager
+            Time.timeScale = 1f;
+            playerController.EffectActions[PowerUpType.SlowTime] += OnSlowTime;
+
+            _score = 0;
+            OnUpdateScore(_score);
+        }
+
+        public void OnRestartButton()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void OnUpdateScore(int value)
+        {
+            _score += value;
+            scoreText.text = hitCounterText + _score;
+        }
+
+        private void OnPlayerLoad(PlayerSettings playerSettings)
+        {
+            BarArgs args = new BarArgs { startValue = playerSettings.MaxHP, maxValue = playerSettings.MaxHP, minValue = 0 };
+            hpBar.SetUpSlider(args);
+        }
+
+        private void OnPlayerTakeDamage(int value)
+        {
+            hpBar.modifyValue(-value);
+        }
+
+        private void OnPlayerHeal(float value)
+        {
+            hpBar.modifyValue((int)value);
+        }
+        private void OnPlayerDeath()
+        {
+            deathPanel.SetActive(true);
+        }
 
         //Move to game manager
-        Time.timeScale = 1f;
-        playerController.EffectActions[EffectType.SlowTime] += OnSlowTime;
+        private void OnSlowTime(float duration)
+        {
+            StartCoroutine(SlowTime(duration));
+        }
 
-        _score = 0;
-        OnUpdateScore(_score);
-    }
+        private IEnumerator SlowTime(float duration)
+        {
+            Time.timeScale = 0.5f;
+            yield return new WaitForSeconds(duration);
+            Time.timeScale = 1f;
+        }
 
-    public void OnRestartButton()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    public void OnUpdateScore(int value)
-    {
-        _score += value;
-        scoreText.text = hitCounterText + _score;
-    }
-
-    private void OnPlayerLoad(PlayerSettings playerSettings)
-    {
-        BarArgs args = new BarArgs { startValue = playerSettings.MaxHP, maxValue = playerSettings.MaxHP, minValue = 0 };
-        hpBar.SetUpSlider(args);
-    }
-
-    private void OnPlayerTakeDamage(int value)
-    {
-        hpBar.modifyValue(-value);
-    }
-
-    private void OnPlayerHeal(float value)
-    {
-        hpBar.modifyValue((int)value);
-    }
-    private void OnPlayerDeath()
-    {
-        deathPanel.SetActive(true);
-    }
-
-    //Move to game manager
-    private void OnSlowTime(float duration)
-    {
-        StartCoroutine(SlowTime(duration));
-    }
-
-    private IEnumerator SlowTime(float duration)
-    {
-        Time.timeScale = 0.5f;
-        yield return new WaitForSeconds(duration);
-        Time.timeScale = 1f;
-    }
-
 }
+

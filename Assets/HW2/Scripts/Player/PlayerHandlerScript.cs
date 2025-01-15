@@ -1,8 +1,14 @@
 using UnityEngine;
 
-public class PlayerHandlerScript : MonoBehaviour
+namespace HW2
 {
-    [Header("Required Player Controller")]
-    [SerializeField] protected PlayerController playerController;
-    protected PlayerSettings PlayerSettings { get { return playerController.PlayerSettings; } }
+    public class PlayerHandlerScript : MonoBehaviour
+    {
+        [Header("Required Player Controller")]
+        [SerializeField] protected PlayerController playerController;
+        protected PlayerSettings PlayerSettings { get { return playerController.PlayerSettings; } }
+    }
 }
+
+
+

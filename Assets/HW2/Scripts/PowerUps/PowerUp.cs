@@ -1,21 +1,29 @@
 using UnityEngine;
-using System.ComponentModel;
-public abstract class PowerUp : MonoBehaviour
+using UnityEngine.Events;
+
+namespace HW2
 {
-
-    public PowerUpsEnum Enum;
-
-    protected void Awake()
+    public class PowerUp : MonoBehaviour
     {
-        gameObject.name = this.GetType().Name;
+        [SerializeField] private PowerUpType type;
+        [SerializeField] private PowerUpSettings _powerUpsData;
+
+        public event UnityAction<Effect> OnPowerUpEffect;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.CompareTag("Player")) return;
+
+            OnPowerUpEffect.Invoke(new Effect { type = type, value = _powerUpsData.GetValueByPowerUpType(type) });
+
+            Destroy(gameObject);
+        }  
     }
-
-    public abstract void OnPickUp();
-
-    private void OnTriggerEnter(Collider other)
+    public struct Effect
     {
-        OnPickUp();
-        Destroy(gameObject);
+        public PowerUpType type;
+        public float value;
     }
-
 }
+
+

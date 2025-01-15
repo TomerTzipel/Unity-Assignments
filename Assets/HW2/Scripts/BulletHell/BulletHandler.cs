@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+
 namespace HW2
 {
     public class BulletHandler : MonoBehaviour

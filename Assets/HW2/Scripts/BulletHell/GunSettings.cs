@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace HW2
 {
     [CreateAssetMenu(fileName = "GunSettings", menuName = "Dodgeball/GunSettings")]

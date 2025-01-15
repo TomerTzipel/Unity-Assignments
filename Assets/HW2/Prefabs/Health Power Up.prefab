@@ -56,8 +56,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Health Power Up
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6083454796680739262, guid: ea1a511f9f9312b4890b456ec6655ba5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8208438564283137849, guid: ea1a511f9f9312b4890b456ec6655ba5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 509065657471828957}
   m_SourcePrefab: {fileID: 100100000, guid: ea1a511f9f9312b4890b456ec6655ba5, type: 3}
+--- !u!1 &4763103807899551808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8208438564283137849, guid: ea1a511f9f9312b4890b456ec6655ba5, type: 3}
+  m_PrefabInstance: {fileID: 3743558706531366777}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &509065657471828957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4763103807899551808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a433fbf11a9bb4438c54ba52ced4551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  _powerUpsData: {fileID: 11400000, guid: d81e3eef8302f824fb951c21f82a398a, type: 2}
