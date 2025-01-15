@@ -4,6 +4,8 @@ HW2
 Notice that all cripts are inthe HW2 namespace and the proper scene is under the HW2 folder
 
 You play by moving with left click, destroying bullets adds score, hp will be lost when the player is green.
+You can flash with F towards the mouse position
+
 Purple Cube = Invincibility
 Green Cube  = Heal
 Teal Cube  = Time Slow
