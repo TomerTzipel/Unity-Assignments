@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5a0343fdae1684d8904d58102130c6, type: 3}
   m_Name: GunSettings
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 149142814272231253, guid: 2452daf2524a6b243b362925a54bf959, type: 3}
-  minFireRate: 1
-  maxFireRate: 5
+  <BulletPrefab>k__BackingField: {fileID: 149142814272231253, guid: 2452daf2524a6b243b362925a54bf959, type: 3}
+  <MinFireRate>k__BackingField: 1
+  <MaxFireRate>k__BackingField: 5

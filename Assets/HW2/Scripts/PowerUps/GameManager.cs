@@ -67,7 +67,7 @@ namespace HW2
         {
             Vector3 position = GetSpawnPosition();
             PowerUp spawnedPowerUp = Instantiate(powerUpPrefab, position, Quaternion.identity, powerUpParent);
-            spawnedPowerUp.OnPowerUpEffect += OnPowerUpEffet;
+            spawnedPowerUp.OnPowerUpEffect += playerController.ActivateEffect;
         }
 
         private Vector3 GetSpawnPosition()
@@ -78,10 +78,6 @@ namespace HW2
             pos.y = 1.2f;
 
             return pos;
-        }
-        private void OnPowerUpEffet(Effect effect)
-        {
-            playerController.ActivateEffect(effect);
         }
 
         private void OnSlowTime(float duration)

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d190656f090651d41afd5f0265a0b8b3, type: 3}
-  m_Name: PowerUpsData
+  m_Name: PowerUpSettings
   m_EditorClassIdentifier: 
   _slowDownDuration: 2
   _healValue: 30

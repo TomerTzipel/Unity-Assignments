@@ -5,13 +5,9 @@ namespace HW2
     [CreateAssetMenu(fileName = "GunSettings", menuName = "Dodgeball/GunSettings")]
     public class GunSettings : ScriptableObject
     {
-        [SerializeField] BulletHandler bulletPrefab;
-        [SerializeField] float minFireRate;
-        [SerializeField] float maxFireRate;
-
-        public BulletHandler BulletPrefab { get { return bulletPrefab; } }
-        public float MinFireRate { get { return minFireRate; } }
-        public float MaxFireRate { get { return maxFireRate; } }
+        [field: SerializeField] public BulletHandler BulletPrefab { get; private set; }
+        [field: SerializeField] public float MinFireRate { get; private set; }
+        [field: SerializeField] public float MaxFireRate { get; private set; }
     }
 }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace HW2
 {
-    [CreateAssetMenu(fileName = "PowerUpsData", menuName = "Scriptable Objects/PowerUpsData")]
+    [CreateAssetMenu(fileName = "PowerUpSettings", menuName = "Scriptable Objects/PowerUpSettings")]
     public class PowerUpSettings : ScriptableObject
     {
         [SerializeField] private float _slowDownDuration;

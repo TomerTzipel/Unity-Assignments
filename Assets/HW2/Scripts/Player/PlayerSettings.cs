@@ -4,36 +4,19 @@ using UnityEngine;
     [CreateAssetMenu(fileName = "PlayerSettings", menuName = "Scriptable Objects/PlayerSettings")]
     public class PlayerSettings : ScriptableObject
     {
-        [Header("Stats")]
-        [SerializeField] private int maxHP;
-        [SerializeField] private float invulDuration;
+        [field: SerializeField, Header("Stats")] public int MaxHP { get; private set; }
+        [field: SerializeField] public float InvulDuration { get; private set; }
 
-        [Header("Movement")]
-        [SerializeField] private float movementSpeed;
-        [SerializeField] private float accelerationSpeed;
-        [SerializeField] private float destinationOffset;
+        [field: SerializeField, Header("Movement")] public float MovementSpeed { get; private set; }
+        [field: SerializeField] public float AccelerationSpeed { get; private set; }
+        [field: SerializeField] public float DestinationOffset { get; private set; }
 
-        [Header("Flash")]
-        [SerializeField] private float flashCD;
-        [SerializeField] private float flashDistance;
+        [field: SerializeField, Header("Flash")] public float FlashCD { get; private set; }
+        [field:SerializeField] public float FlashDistance { get; private set; }
 
-        [Header("Visuals")]
-        [SerializeField] private Material playerMaterial;
-        [SerializeField] private Material hurtMaterial;
-
-        public int MaxHP { get { return maxHP; } }
-        public float InvulDuration { get { return invulDuration; } }
-        public float MovementSpeed { get { return movementSpeed; } }
-        public float AccelerationSpeed { get { return accelerationSpeed; } }
-        public float DestinationOffset { get { return destinationOffset; } }
-
-        public float FlashCD { get { return flashCD; } }
-        public float FlashDistance { get { return flashDistance; } }
-
-
-        public Material PlayerMaterial { get { return playerMaterial; } }
-        public Material HurtMaterial { get { return hurtMaterial; } }
-    }
+        [field: SerializeField, Header("Visuals")] public Material PlayerMaterial { get; private set; }
+        [field:SerializeField] public Material HurtMaterial { get; private set; }
+}
 
 
 

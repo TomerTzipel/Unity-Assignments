@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d000bfb7c1d60e4684f18a002c3618f, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  maxHP: 200
-  invulDuration: 0.6
-  movementSpeed: 10
-  accelerationSpeed: 100
-  destinationOffset: 0.1
-  flashCD: 1
-  flashDistance: 3
-  playerMaterial: {fileID: 2100000, guid: d212f3ba63905b1478e424d539b2ac8c, type: 2}
-  hurtMaterial: {fileID: 2100000, guid: 40709b4e0f402b64ea547b0ab0835d6b, type: 2}
+  <MaxHP>k__BackingField: 200
+  <InvulDuration>k__BackingField: 0.6
+  <MovementSpeed>k__BackingField: 10
+  <AccelerationSpeed>k__BackingField: 100
+  <DestinationOffset>k__BackingField: 0.1
+  <FlashCD>k__BackingField: 1
+  <FlashDistance>k__BackingField: 3
+  <PlayerMaterial>k__BackingField: {fileID: 2100000, guid: d212f3ba63905b1478e424d539b2ac8c, type: 2}
+  <HurtMaterial>k__BackingField: {fileID: 2100000, guid: 40709b4e0f402b64ea547b0ab0835d6b, type: 2}

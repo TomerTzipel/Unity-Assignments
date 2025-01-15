@@ -83,4 +83,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  _powerUpsData: {fileID: 11400000, guid: d81e3eef8302f824fb951c21f82a398a, type: 2}
+  _powerUpSettings: {fileID: 11400000, guid: d81e3eef8302f824fb951c21f82a398a, type: 2}

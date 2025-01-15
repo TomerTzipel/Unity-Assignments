@@ -6,7 +6,7 @@ namespace HW2
     public class PowerUp : MonoBehaviour
     {
         [SerializeField] private PowerUpType type;
-        [SerializeField] private PowerUpSettings _powerUpsData;
+        [SerializeField] private PowerUpSettings _powerUpSettings;
 
         public event UnityAction<Effect> OnPowerUpEffect;
 
@@ -14,7 +14,7 @@ namespace HW2
         {
             if (!other.CompareTag("Player")) return;
 
-            OnPowerUpEffect.Invoke(new Effect { type = type, value = _powerUpsData.GetValueByPowerUpType(type) });
+            OnPowerUpEffect.Invoke(new Effect { type = type, value = _powerUpSettings.GetValueByPowerUpType(type) });
 
             Destroy(gameObject);
         }  

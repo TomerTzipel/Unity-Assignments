@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe330ff93394a014ea32a9d5740b5eba, type: 3}
   m_Name: BulletSettings
   m_EditorClassIdentifier: 
-  minSpeed: 2
-  maxSpeed: 5
-  bulletDamage: 10
+  <MinSpeed>k__BackingField: 2
+  <MaxSpeed>k__BackingField: 5
+  <BulletDamage>k__BackingField: 10
