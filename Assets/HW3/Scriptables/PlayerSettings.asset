@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d000bfb7c1d60e4684f18a002c3618f, type: 3}
+  m_Name: PlayerSettings
+  m_EditorClassIdentifier: 
+  <MaxHP>k__BackingField: 400
+  <InvulDuration>k__BackingField: 0.6
+  <MovementSpeed>k__BackingField: 8
+  <AccelerationSpeed>k__BackingField: 5
+  <DestinationOffset>k__BackingField: 0.1
+  <FlashCD>k__BackingField: 1
+  <FlashDistance>k__BackingField: 3
+  <PlayerMaterial>k__BackingField: {fileID: 2100000, guid: d212f3ba63905b1478e424d539b2ac8c, type: 2}
+  <HurtMaterial>k__BackingField: {fileID: 2100000, guid: 40709b4e0f402b64ea547b0ab0835d6b, type: 2}

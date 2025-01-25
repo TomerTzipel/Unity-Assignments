@@ -6,9 +6,6 @@ namespace HW2
 {
     public class PlayerHealthHandler : PlayerHandlerScript
     {
-        [SerializeField] private MeshRenderer meshRenderer;
-
-
         public event UnityAction<int> OnPlayerTookDamage;
         public event UnityAction OnPlayerDeath;
 
@@ -62,12 +59,10 @@ namespace HW2
         private IEnumerator InvulDuration(float duration)
         {
             _isInvul = true;
-            meshRenderer.material = PlayerSettings.HurtMaterial;
 
             yield return new WaitForSeconds(duration);
 
             _isInvul = false;
-            meshRenderer.material = PlayerSettings.PlayerMaterial;
         }
     }
 }

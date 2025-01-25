@@ -38,6 +38,7 @@ namespace HW2
                 Debug.DrawLine(ray.origin, _destiantion);
 
                 agent.SetDestination(_destiantion);
+                gameObject.transform.parent.rotation = Quaternion.LookRotation(_destiantion - new Vector3(transform.position.x,0, transform.position.z));
                 _isMoving = true;
             }
         }
@@ -51,7 +52,7 @@ namespace HW2
         public void StopMoving()
         {
             _isMoving = false;
-            agent.ResetPath();
+            agent.ResetPath();      
         }
     }
 }

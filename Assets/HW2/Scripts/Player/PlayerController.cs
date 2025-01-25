@@ -29,6 +29,7 @@ namespace HW2
         private event UnityAction<float> OnSlowTime;
 
         public Dictionary<PowerUpType, UnityAction<float>> EffectActions { get; } = new Dictionary<PowerUpType, UnityAction<float>>();
+        public event UnityAction<PowerUpType> OnPlayerPowerUp;
 
         //Some actions are only invoked inside handlers but I need to allow other managers to subscribe to them
         public event UnityAction<int> OnPlayerTookDamage { add { playerHealthHandler.OnPlayerTookDamage += value; } remove { playerHealthHandler.OnPlayerTookDamage -= value; } }
@@ -78,6 +79,7 @@ namespace HW2
             if (!EffectActions.ContainsKey(effect.type)) return;
 
             EffectActions[effect.type].Invoke(effect.value);
+            OnPlayerPowerUp.Invoke(effect.type);
         }
 
         public void OnMoveCommand(InputAction.CallbackContext context)
