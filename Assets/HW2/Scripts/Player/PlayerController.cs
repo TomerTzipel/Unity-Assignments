@@ -34,6 +34,7 @@ namespace HW2
 
         //Some actions are only invoked inside handlers but I need to allow other managers to subscribe to them
         public event UnityAction<int> OnPlayerTookDamage { add { playerHealthHandler.OnPlayerTookDamage += value; } remove { playerHealthHandler.OnPlayerTookDamage -= value; } }
+        public event UnityAction<float> OnPlayerHealthChange { add { playerHealthHandler.OnPlayerHealthChange += value; } remove { playerHealthHandler.OnPlayerHealthChange -= value; } }
         public event UnityAction OnPlayerDeath { add { playerHealthHandler.OnPlayerDeath += value; } remove { playerHealthHandler.OnPlayerDeath -= value; } }
 
         public PlayerSettings PlayerSettings { get { return playerSettings; } }

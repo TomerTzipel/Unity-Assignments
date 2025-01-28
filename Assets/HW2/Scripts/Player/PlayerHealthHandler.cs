@@ -7,6 +7,7 @@ namespace HW2
     public class PlayerHealthHandler : PlayerHandlerScript
     {
         public event UnityAction<int> OnPlayerTookDamage;
+        public event UnityAction<float> OnPlayerHealthChange;
         public event UnityAction OnPlayerDeath;
 
         private int _currentHP;
@@ -37,7 +38,7 @@ namespace HW2
                 OnPlayerDeath?.Invoke(); 
             }
 
-            
+            OnPlayerHealthChange.Invoke((float)_currentHP/ PlayerSettings.MaxHP);
             OnPlayerTookDamage.Invoke(damage);
         }
 
@@ -50,6 +51,8 @@ namespace HW2
             {
                 _currentHP = PlayerSettings.MaxHP;
             }
+
+            OnPlayerHealthChange.Invoke((float)_currentHP / PlayerSettings.MaxHP);
         }
 
         private void ActivateInvul(float duration)

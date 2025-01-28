@@ -1,20 +1,18 @@
-using HW1;
+
 using HW2;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace HW3
 {
-
-
     public class PlayerAnimationHandler : PlayerHandlerScript
     {
         private static readonly int MovementSpeedAnimatorHash = Animator.StringToHash("MovementSpeedPrecentage");
         private static readonly int PowerUpTypeAnimatorHash = Animator.StringToHash("PowerUpType");
         private static readonly int PowerUpTriggerAnimatorHash = Animator.StringToHash("PowerUpTrigger");
         private static readonly int HurtTriggerAnimatorHash = Animator.StringToHash("HurtTrigger");
-        private static readonly int DeathTriggerAnimatorHash = Animator.StringToHash("DeathTrigger");
-
+        private static readonly int DeathBoolAnimatorHash = Animator.StringToHash("IsDead");
+        private static readonly int HpPrecentageAnimatorHash = Animator.StringToHash("HealthPrecent");
 
         //The more damage the player takes the higher the layer weight of the hurt animation, this is parameter identifies the max damage value for a weight of 1
         [SerializeField] private float maxDamageThreshold;
@@ -28,6 +26,7 @@ namespace HW3
             playerController.OnPlayerPowerUp += ActivatePowerUpAnimation;
             playerController.OnPlayerTookDamage += ActivateHurtAnimation;
             playerController.OnPlayerDeath += ActivateDeathAnimation;
+            playerController.OnPlayerHealthChange += UpdateHealthPrecentage;
         }
 
        
@@ -57,10 +56,12 @@ namespace HW3
         public void ActivateDeathAnimation()
         {
             Debug.Log("Activating Death Animation!");
-            animator.SetBool("IsDead", true);
+            animator.SetBool(DeathBoolAnimatorHash, true);
             agent.isStopped = true;
-
-
+        }
+        public void UpdateHealthPrecentage(float hpPrecent)
+        {
+            animator.SetFloat(HpPrecentageAnimatorHash, hpPrecent);
         }
     }
 }

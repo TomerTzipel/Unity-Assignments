@@ -6,9 +6,6 @@ namespace HW3
     {
         [SerializeField] private GameObject bloodParticleEffect; 
         
-
-        
-
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             Debug.Log("Entered Death Animation");
