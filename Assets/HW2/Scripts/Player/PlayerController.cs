@@ -1,9 +1,10 @@
 using HW1;
-using HW2;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using HW3;
 
 namespace HW2
 {
@@ -39,7 +40,7 @@ namespace HW2
 
         private void Awake()
         {
-            //Add effect actions to the dictionary
+            
             EffectActions.Add(PowerUpType.Heal, OnPlayerHeal);
             EffectActions.Add(PowerUpType.Invincibility, OnPlayerInvul);
             EffectActions.Add(PowerUpType.SlowTime, OnSlowTime);
@@ -69,10 +70,16 @@ namespace HW2
             }
         }
 
+   
         private void PlayerDeath()
         {
-            transform.parent.gameObject.SetActive(false);
+            Debug.Log("PlayerDeath() triggered!");
+
+           
+            playerHealthHandler.GetComponent<PlayerAnimationHandler>().ActivateDeathAnimation();
         }
+
+
 
         public void ActivateEffect(Effect effect)
         {
@@ -92,6 +99,8 @@ namespace HW2
             if (!context.performed) return;
             playerFlashHandler.Flash();
         }
+
+
     }
 }
 

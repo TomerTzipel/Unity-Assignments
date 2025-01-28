@@ -15,7 +15,7 @@ MonoBehaviour:
   <MaxHP>k__BackingField: 200
   <InvulDuration>k__BackingField: 0.6
   <MovementSpeed>k__BackingField: 10
-  <AccelerationSpeed>k__BackingField: 100
+  <AccelerationSpeed>k__BackingField: 10
   <DestinationOffset>k__BackingField: 0.1
   <FlashCD>k__BackingField: 1
   <FlashDistance>k__BackingField: 3

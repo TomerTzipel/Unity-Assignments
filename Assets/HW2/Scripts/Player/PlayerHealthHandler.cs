@@ -31,11 +31,13 @@ namespace HW2
 
             _currentHP -= damage;
 
-            if (_currentHP <= 0)
+            if (_currentHP <= 0 )
             {
-                OnPlayerDeath.Invoke();
+                _currentHP = 0;
+                OnPlayerDeath?.Invoke(); 
             }
 
+            
             OnPlayerTookDamage.Invoke(damage);
         }
 
