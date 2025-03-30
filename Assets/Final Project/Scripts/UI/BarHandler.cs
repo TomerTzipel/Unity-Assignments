@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class BarHandler : MonoBehaviour
 {
     //Serialized Fields:
@@ -12,7 +13,7 @@ public class BarHandler : MonoBehaviour
 
     public void UpdateSlider(float value,int currentHP,int maxHP)
     {
-        slider.value = Mathf.Clamp(value, 0f,1f);
+        slider.value = Mathf.Clamp(value,0f,1f);
         sliderText.text = $"{currentHP}/{maxHP}";
     }
 
@@ -28,6 +29,7 @@ public class BarHandler : MonoBehaviour
         while (time < duration) 
         {
             yield return null;
+            slider.value = time / duration;
             time += Time.deltaTime;
         }       
     }

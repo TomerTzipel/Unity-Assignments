@@ -5,7 +5,7 @@ public class PlayerSettings : ScriptableObject
 {
     [field: SerializeField, Header("Stats")] public int MaxHP { get; private set; }
     [field: SerializeField] public float InvulDuration { get; private set; }
-    [SerializeField][field: Range(0.1f, 0.9f)] public float SlowTimeMultiplier { get; private set; }
+    [field: SerializeField, Range(0.1f, 0.9f)] public float SlowTimeMultiplier { get; private set; }
 
     [field: SerializeField, Header("Movement")] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float AccelerationSpeed { get; private set; }

@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
 
     private void OnPlayerHealthChange(HealthChangeArgs args)
     {
-        float hpPercentage = (((float)args.currentHealth) / args.maxHealth) * 100f;
+        float hpPercentage = (((float)args.currentHealth) / args.maxHealth);
         hpBar.UpdateSlider(hpPercentage, args.currentHealth, args.maxHealth);
     }
 

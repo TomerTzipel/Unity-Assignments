@@ -74,7 +74,7 @@ namespace HW2
 
         private void PlayerDeath()
         {
-            playerCollidor.enabled = false;
+            //playerCollidor.enabled = false;
             Debug.Log("PlayerDeath() triggered!");
         }
 

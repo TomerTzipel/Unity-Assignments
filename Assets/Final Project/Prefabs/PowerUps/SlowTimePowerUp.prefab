@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowTimePowerUp
       objectReference: {fileID: 0}
+    - target: {fileID: 7257005527395135081, guid: f8895cfe004793c41b846a72646a698b, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7951322236285560659, guid: f8895cfe004793c41b846a72646a698b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

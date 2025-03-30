@@ -27,7 +27,11 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
+    //TODO REMOVE THiS
+    private void Start()
+    {
+        StartGameTimer();
+    }
     public void StartGameTimer()
     {
         TimerSeconds = 0;

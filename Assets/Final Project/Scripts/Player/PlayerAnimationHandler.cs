@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAnimationHandler : PlayerHandlerScript
 {
     //Hashes:
-    private static readonly int MovementSpeedAnimatorHash = Animator.StringToHash("MovementSpeedPrecentage");
+    private static readonly int MovementSpeedAnimatorHash = Animator.StringToHash("MovementSpeedPercentage");
     private static readonly int HurtTriggerAnimatorHash = Animator.StringToHash("HurtTrigger");
     private static readonly int DeathBoolAnimatorHash = Animator.StringToHash("IsDead");
 

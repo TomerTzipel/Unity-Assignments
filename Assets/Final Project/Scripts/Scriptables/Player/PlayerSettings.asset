@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHP>k__BackingField: 200
   <InvulDuration>k__BackingField: 1.5
+  <SlowTimeMultiplier>k__BackingField: 0.5
   <MovementSpeed>k__BackingField: 10
   <AccelerationSpeed>k__BackingField: 100
   _destinationOffset: 0.1
   <FlashCD>k__BackingField: 3
   <FlashDistance>k__BackingField: 3
+  <PowerUpScore>k__BackingField: 50
+  <TimerScore>k__BackingField: 100
+  <HitScore>k__BackingField: 5

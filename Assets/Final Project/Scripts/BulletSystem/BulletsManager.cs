@@ -42,10 +42,8 @@ public class BulletsManager : MonoBehaviour
 
     private void HandleBulletHit(BulletCollisionArgs args)
     {
-        Debug.Log("We HIT SOMETHING");
         if (args.objectHit.CompareTag("Player"))
         {
-            Debug.Log("We HIT PLAYER");
             int damage = (int)(args.damage * _damageMultipler);
             playerController.HitPlayer(damage);
             Destroy(args.bullet.gameObject);

@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerFlashHandler playerFlashHandler;
 
     //Fields:
+    private InputSystem_Actions _inputActions;
     private int _score;
+    
 
     //Events:
     public event UnityAction<HealthChangeArgs> OnPlayerHealthChange { add { playerHealthHandler.OnPlayerHealthChange += value; } remove { playerHealthHandler.OnPlayerHealthChange -= value; } }
@@ -32,26 +34,45 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        _inputActions = new InputSystem_Actions();
+
         OnPlayerDeath += PlayerDeath;
         OnPlayerDeath += playerMovementHandler.StopMoving;
         OnPlayerFlash += playerMovementHandler.StopMoving;
         OnPlayerPowerUp += HandleSlowTime;
 
-        _score = 0;
+       _score = 0;
+    }
+    private void Start()
+    {
+        GameManager.Instance.OnGameTimerTick += HandleTimerTick;
     }
 
+    private void OnEnable()
+    {
+        _inputActions.Player.MouseMove.Enable();
+        _inputActions.Player.Flash.Enable();
+        _inputActions.Player.MouseMove.performed += OnMoveCommand;
+        _inputActions.Player.Flash.performed += OnFlashCommand;
+
+    }
+    private void OnDisable()
+    {
+        _inputActions.Player.MouseMove.performed -= OnMoveCommand;
+        _inputActions.Player.Flash.performed -= OnFlashCommand;
+        _inputActions.Player.MouseMove.Disable();
+        _inputActions.Player.Flash.Disable();
+    }
 
     //User Input Handling
     public void OnMoveCommand(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
         playerMovementHandler.Move();
     }
 
 
     public void OnFlashCommand(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
         playerFlashHandler.Flash();
     }
 
@@ -76,7 +97,7 @@ public class PlayerController : MonoBehaviour
     private void GainScore(int score)
     {
         _score += score;
-        OnPlayerScoreGain.Invoke(score);
+        OnPlayerScoreGain.Invoke(_score);
     }
 
 
