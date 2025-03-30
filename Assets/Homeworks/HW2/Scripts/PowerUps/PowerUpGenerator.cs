@@ -10,13 +10,12 @@ namespace HW2
     {
         Heal,
         SlowTime,
-        Invincibility
+        Invulnerable
     }
 
     [CreateAssetMenu(fileName = "PowerUpGenerator", menuName = "Scriptable Objects/Power Up/PowerUpGenerator")]
     public class PowerUpGenerator : ScriptableObject
     {
-
         [Serializable]
         public struct PowerUpData
         {
@@ -26,7 +25,6 @@ namespace HW2
         }
 
         [field: SerializeField] public List<PowerUpData> PowerUps { get; private set; }
-
 
         public PowerUp GetPowerUpByType(PowerUpType type)
         {
@@ -38,7 +36,6 @@ namespace HW2
             return PowerUps[index].PowerUpPrefab;
 
         }
-
 
         public PowerUp GetRandomPowerUp()
         {

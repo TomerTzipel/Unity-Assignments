@@ -11,6 +11,7 @@ namespace HW2
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerSettings playerSettings;
+        [SerializeField] private Collider playerCollidor;
 
         [Header("Handlers")]
         [SerializeField] private PlayerMovementHandler playerMovementHandler;
@@ -29,7 +30,7 @@ namespace HW2
         private event UnityAction<float> OnPlayerInvul;
         private event UnityAction<float> OnSlowTime;
 
-        public Dictionary<PowerUpType, UnityAction<float>> EffectActions { get; } = new Dictionary<PowerUpType, UnityAction<float>>();
+        public Dictionary<PowerUpType, UnityAction<float>> EffectActions { get; private set; } = new Dictionary<PowerUpType, UnityAction<float>>();
         public event UnityAction<PowerUpType> OnPlayerPowerUp;
 
         //Some actions are only invoked inside handlers but I need to allow other managers to subscribe to them
@@ -43,7 +44,7 @@ namespace HW2
         {
             
             EffectActions.Add(PowerUpType.Heal, OnPlayerHeal);
-            EffectActions.Add(PowerUpType.Invincibility, OnPlayerInvul);
+            EffectActions.Add(PowerUpType.Invulnerable, OnPlayerInvul);
             EffectActions.Add(PowerUpType.SlowTime, OnSlowTime);
 
             OnPlayerDeath += PlayerDeath;
@@ -71,16 +72,11 @@ namespace HW2
             }
         }
 
-   
         private void PlayerDeath()
         {
+            playerCollidor.enabled = false;
             Debug.Log("PlayerDeath() triggered!");
-
-           
-            playerHealthHandler.GetComponent<PlayerAnimationHandler>().ActivateDeathAnimation();
         }
-
-
 
         public void ActivateEffect(Effect effect)
         {

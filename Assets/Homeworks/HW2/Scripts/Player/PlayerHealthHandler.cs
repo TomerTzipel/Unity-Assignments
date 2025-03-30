@@ -21,7 +21,7 @@ namespace HW2
             playerController.OnPlayerHitAction += TakeDamage;
 
             playerController.EffectActions[PowerUpType.Heal] += Heal;
-            playerController.EffectActions[PowerUpType.Invincibility] += ActivateInvul;
+            playerController.EffectActions[PowerUpType.Invulnerable] += ActivateInvul;
         }
 
         public void TakeDamage(int damage)

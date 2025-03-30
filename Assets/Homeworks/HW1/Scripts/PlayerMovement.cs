@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 namespace HW1
 {
     public class PlayerMovement : AgentMovement
     {
 
-        [SerializeField] private PlayerSettings playerSettings;
+        [SerializeField] private HW2.PlayerSettings playerSettings;
 
         private Vector3 _destiantion;
         private bool _isMoving = false;

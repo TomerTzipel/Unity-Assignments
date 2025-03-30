@@ -1,26 +1,25 @@
-
 using UnityEngine.UI;
 using UnityEngine;
 
 
-
-[CreateAssetMenu(fileName = "BarSettings", menuName = "Scriptable Objects/BarSettings")]
-public class BarSettings : ScriptableObject
+namespace HW2
 {
-    [SerializeField] BarArgs values;
-    [Header("Settings")]
-    [SerializeField] private bool isSliderWholeNumbers;
-    [SerializeField] private Slider.Direction sliderDirection;
-
-    public void SetUpSlider(Slider slider)
+    [CreateAssetMenu(fileName = "BarSettings", menuName = "Scriptable Objects/BarSettings")]
+    public class BarSettings : ScriptableObject
     {
-        slider.minValue = values.minValue;
-        slider.maxValue = values.maxValue;
-        slider.value = values.startValue;
-        slider.direction = sliderDirection;
-        slider.wholeNumbers = isSliderWholeNumbers;
+        [SerializeField] BarArgs values;
+        [Header("Settings")]
+        [SerializeField] private bool isSliderWholeNumbers;
+        [SerializeField] private Slider.Direction sliderDirection;
+
+        public void SetUpSlider(Slider slider)
+        {
+            slider.minValue = values.minValue;
+            slider.maxValue = values.maxValue;
+            slider.value = values.startValue;
+            slider.direction = sliderDirection;
+            slider.wholeNumbers = isSliderWholeNumbers;
+        }
     }
-
-    
-
 }
+

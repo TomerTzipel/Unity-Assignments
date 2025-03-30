@@ -1,6 +1,6 @@
 using UnityEngine;
-
-
+namespace HW2
+{
     [CreateAssetMenu(fileName = "PlayerSettings", menuName = "Scriptable Objects/PlayerSettings")]
     public class PlayerSettings : ScriptableObject
     {
@@ -12,11 +12,13 @@ using UnityEngine;
         [field: SerializeField] public float DestinationOffset { get; private set; }
 
         [field: SerializeField, Header("Flash")] public float FlashCD { get; private set; }
-        [field:SerializeField] public float FlashDistance { get; private set; }
+        [field: SerializeField] public float FlashDistance { get; private set; }
 
         [field: SerializeField, Header("Visuals")] public Material PlayerMaterial { get; private set; }
-        [field:SerializeField] public Material HurtMaterial { get; private set; }
+        [field: SerializeField] public Material HurtMaterial { get; private set; }
+    }
 }
+
 
 
 

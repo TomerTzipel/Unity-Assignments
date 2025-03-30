@@ -1,11 +1,10 @@
-
 using HW2;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace HW3
 {
-    public class PlayerAnimationHandler : PlayerHandlerScript
+    public class PlayerAnimationHandler : HW2.PlayerHandlerScript
     {
         private static readonly int MovementSpeedAnimatorHash = Animator.StringToHash("MovementSpeedPrecentage");
         private static readonly int PowerUpTypeAnimatorHash = Animator.StringToHash("PowerUpType");
@@ -38,7 +37,7 @@ namespace HW3
             }
         }
 
-        private void ActivatePowerUpAnimation(PowerUpType type)
+        private void ActivatePowerUpAnimation(HW2.PowerUpType type)
         {
             animator.SetLayerWeight(1, 1);
             animator.SetInteger(PowerUpTypeAnimatorHash, (int)type);
@@ -48,7 +47,6 @@ namespace HW3
         private void ActivateHurtAnimation(int damage)
         {
             float weight = Mathf.Clamp(damage / maxDamageThreshold, 0, 1);
-            Debug.Log(weight);
             animator.SetLayerWeight(1, weight);
             animator.SetTrigger(HurtTriggerAnimatorHash);
         }

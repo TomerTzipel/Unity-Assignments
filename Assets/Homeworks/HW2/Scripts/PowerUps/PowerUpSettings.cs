@@ -17,7 +17,7 @@ namespace HW2
                     return _healValue;
                 case PowerUpType.SlowTime:
                     return _slowDownDuration;
-                case PowerUpType.Invincibility:
+                case PowerUpType.Invulnerable:
                     return _invincibilityDuration;
 
             }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d000bfb7c1d60e4684f18a002c3618f, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  <MaxHP>k__BackingField: 400
+  <MaxHP>k__BackingField: 20
   <InvulDuration>k__BackingField: 0.6
   <MovementSpeed>k__BackingField: 8
   <AccelerationSpeed>k__BackingField: 5
