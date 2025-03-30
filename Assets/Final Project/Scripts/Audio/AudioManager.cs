@@ -13,6 +13,10 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
 
     [SerializeField] public AudioMixer audioMixer;
+    [SerializeField] public AudioSourcePool sfxPool;
+
+
+
     private void Awake()
     {
         if (!Instance.IsUnityNull())
@@ -47,5 +51,10 @@ public class AudioManager : MonoBehaviour
 
         float dbValue = Mathf.Log10(Mathf.Clamp(value, 0.001f, 1f)) * 20f;
         audioMixer.SetFloat(audioGroup.ToString(), dbValue);
+    }
+
+    public void PlaySfx(float volume, AudioClip audio, float pitch)
+    {
+        sfxPool.PlaySound(volume, audio, pitch);
     }
 }

@@ -10,7 +10,6 @@ public class MusicPlayer : MonoBehaviour
 
     private void Start()
     {
-
         outputSource.outputAudioMixerGroup = outputMixer;
         outputSource.clip = music;
         outputSource.loop = true;

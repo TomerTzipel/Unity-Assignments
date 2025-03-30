@@ -2,22 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioPool : MonoBehaviour
+public class AudioSourcePool : MonoBehaviour
 {
-    public static AudioPool Instance;
-
     [SerializeField] private int poolSize = 15;
     [SerializeField] private AudioMixerGroup outputMixer;
 
     private List<AudioSource> audioSources = new List<AudioSource>();
-
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
 
     private void Start()
     {
