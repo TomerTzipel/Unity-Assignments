@@ -5,13 +5,9 @@ using UnityEngine.UI;
 public class SliderManager : MonoBehaviour
 {
     [Header("Volume Sliders")]
-    public Slider masterSlider;
-    public Slider musicSlider;
-    public Slider sfxSlider;
-
-    public event Action<float> OnMasterVolumeChanged;
-    public event Action<float> OnMusicVolumeChanged;
-    public event Action<float> OnSFXVolumeChanged;
+    [SerializeField] private Slider masterSlider;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
 
     private void Start()
     {
@@ -21,23 +17,17 @@ public class SliderManager : MonoBehaviour
 
         masterSlider.onValueChanged.AddListener(val =>
         {
-            PlayerPrefs.SetFloat("MasterVolume", val);
-            PlayerPrefs.Save();
-            OnMasterVolumeChanged?.Invoke(val);
+            AudioManager.Instance.ApplyVolume(AudioGroup.Master, val);
         });
 
         musicSlider.onValueChanged.AddListener(val =>
         {
-            PlayerPrefs.SetFloat("MusicVolume", val);
-            PlayerPrefs.Save();
-            OnMusicVolumeChanged?.Invoke(val);
+            AudioManager.Instance.ApplyVolume(AudioGroup.Music, val);
         });
 
         sfxSlider.onValueChanged.AddListener(val =>
         {
-            PlayerPrefs.SetFloat("SFXVolume", val);
-            PlayerPrefs.Save();
-            OnSFXVolumeChanged?.Invoke(val);
+            AudioManager.Instance.ApplyVolume(AudioGroup.SFX, val);
         });
     }
 }

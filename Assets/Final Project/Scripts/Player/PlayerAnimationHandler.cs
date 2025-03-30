@@ -5,12 +5,11 @@ public class PlayerAnimationHandler : PlayerHandlerScript
     //Hashes:
     private static readonly int MovementSpeedAnimatorHash = Animator.StringToHash("MovementSpeedPercentage");
     private static readonly int HurtTriggerAnimatorHash = Animator.StringToHash("HurtTrigger");
-    private static readonly int DeathBoolAnimatorHash = Animator.StringToHash("IsDead");
+    private static readonly int DeathTriggerAnimatorHash = Animator.StringToHash("DeadTrigger");
 
 
     //Serialized Fields:
-    [SerializeField] private Animator animator;
-
+    [SerializeField] private Animator animator; 
 
     private void Awake()
     {
@@ -36,10 +35,8 @@ public class PlayerAnimationHandler : PlayerHandlerScript
         }     
     }
 
-
     private void ActivateDeathAnimation()
     {
-        Debug.Log("Activating Death Animation!");
-        animator.SetBool(DeathBoolAnimatorHash, true);
+        animator.SetTrigger(DeathTriggerAnimatorHash);
     }
 }

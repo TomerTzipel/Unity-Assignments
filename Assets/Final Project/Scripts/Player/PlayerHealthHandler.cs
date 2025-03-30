@@ -12,6 +12,17 @@ public struct HealthChangeArgs
 
 public class PlayerHealthHandler : PlayerHandlerScript
 {
+
+    //Serialized Fields:
+
+    //Because the Model has two materials I need to add the same material twice,
+    //and changing the materialvalue only does it for the head and legs
+    [SerializeField] private Material[] invulMaterial;
+    [SerializeField] private Material[] regularMaterial;
+    [SerializeField] private Material[] deadMaterial;
+    [SerializeField] private SkinnedMeshRenderer meshRenderer;
+
+
     //Fields:
     private int _currentHP;
     private int _maxHP;
@@ -38,15 +49,15 @@ public class PlayerHealthHandler : PlayerHandlerScript
     {
         if (_isInvul) return;
 
-        ActivateInvul(PlayerSettings.InvulDuration);
-
         _currentHP -= damage;
 
         if (_currentHP <= 0)
         {
             _currentHP = 0;
+            meshRenderer.materials = deadMaterial;
             OnPlayerDeath.Invoke();
         }
+        if(_currentHP != 0) ActivateInvul(PlayerSettings.InvulDuration);
 
         OnPlayerHealthChange.Invoke(new HealthChangeArgs
         {
@@ -99,9 +110,9 @@ public class PlayerHealthHandler : PlayerHandlerScript
     private IEnumerator InvulDuration(float duration)
     {
         _isInvul = true;
-
+        meshRenderer.materials = invulMaterial;
         yield return new WaitForSeconds(duration);
-
+        meshRenderer.materials = regularMaterial;
         _isInvul = false;
     }
 }

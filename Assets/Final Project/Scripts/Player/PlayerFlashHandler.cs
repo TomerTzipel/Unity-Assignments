@@ -5,10 +5,15 @@ using System.Collections;
 
 public class PlayerFlashHandler : PlayerHandlerScript
 {
+
+
+    //Serialized Fields:
+    [SerializeField] ParticleSystem flashParticleSystemEffect;
+
+
     //Fields:
     public UnityAction OnPlayerFlash;
     private bool _isFlashAvailable = true;
-
 
     public void Flash()
     {
@@ -16,6 +21,7 @@ public class PlayerFlashHandler : PlayerHandlerScript
 
         OnPlayerFlash.Invoke();
         StartCoroutine(StartFlashCD(PlayerSettings.FlashCD));
+        PlayFlashEffect();
 
         Vector3 position = transform.position;
         float distanceToPlayer = Vector3.Distance(Camera.main.transform.position, new Vector3(position.x, position.y - 1f, position.y));
@@ -30,6 +36,17 @@ public class PlayerFlashHandler : PlayerHandlerScript
         NavMeshAgent.Warp(new Vector3(newPosition.x, position.y, newPosition.y));
     }
      
+    private void PlayFlashEffect()
+    {
+        Vector3 spawnPosition = transform.position;
+        ParticleSystem flashEffect = Instantiate(flashParticleSystemEffect, spawnPosition, Quaternion.identity);
+
+        if (flashEffect != null)
+        {
+            flashEffect.Play();
+            Destroy(flashEffect.gameObject, 2f);
+        }      
+    }
 
     private IEnumerator StartFlashCD(float cooldown)
     {

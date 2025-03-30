@@ -11,21 +11,27 @@ public class UIManager : MonoBehaviour
     [SerializeField] private BarHandler flashCooldownBar;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text timerText;
+
+    [SerializeField] private GameObject PauseMenu;
     //Fields:
     private const string ScoreText = "Score:";
     
     private void Awake()
     {
+        GameManager.Instance.OnGameTimerTick += UpdateTimer;
+        GameManager.Instance.OnGamePause += OpenPauseMenu;
+
         hpBar.UpdateSlider(1f, playerController.PlayerSettings.MaxHP, playerController.PlayerSettings.MaxHP);
         playerController.OnPlayerHealthChange += OnPlayerHealthChange;
         playerController.OnPlayerFlash += HandlePlayerFlash;
         playerController.OnPlayerScoreGain += HandleScoreUpdate;
         HandleScoreUpdate(0);
     }
-    private void Start()
+    public void ResumeClicked()
     {
-        GameManager.Instance.OnGameTimerTick += UpdateTimer;
+        GameManager.Instance.ResumeGame();
     }
+
     private void HandlePlayerFlash()
     {
         flashCooldownBar.FillInDuration(playerController.PlayerSettings.FlashCD);
@@ -48,4 +54,11 @@ public class UIManager : MonoBehaviour
         int minutes = totalSeconds / 60;
         timerText.text = $"{minutes}:{seconds}";
     }
+
+    private void OpenPauseMenu()
+    {
+        PauseMenu.SetActive(true);
+    }
+
+    
 }

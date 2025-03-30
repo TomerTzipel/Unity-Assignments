@@ -5,7 +5,6 @@ public class DeathStateBehaviour : StateMachineBehaviour
     [SerializeField] private ParticleSystem bloodParticleEffect;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Entered Death Animation");
 
         if (bloodParticleEffect != null)
         {

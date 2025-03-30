@@ -1,5 +1,6 @@
 using HW2;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     //Fields:
     private InputSystem_Actions _inputActions;
+    private bool _canRecieveInput = true;
     private int _score;
     
 
@@ -35,26 +37,27 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _inputActions = new InputSystem_Actions();
-
+        GameManager.Instance.OnGameTimerTick += HandleTimerTick;
+        GameManager.Instance.OnGameResume += HandleResumeGame;
         OnPlayerDeath += PlayerDeath;
         OnPlayerDeath += playerMovementHandler.StopMoving;
         OnPlayerFlash += playerMovementHandler.StopMoving;
         OnPlayerPowerUp += HandleSlowTime;
-
        _score = 0;
     }
     private void Start()
     {
-        GameManager.Instance.OnGameTimerTick += HandleTimerTick;
+        GameManager.Instance.StartGameTimer();
     }
 
     private void OnEnable()
     {
         _inputActions.Player.MouseMove.Enable();
         _inputActions.Player.Flash.Enable();
+        _inputActions.Player.Pause.Enable();
+        _inputActions.Player.Pause.performed += OnPauseCommand;
         _inputActions.Player.MouseMove.performed += OnMoveCommand;
         _inputActions.Player.Flash.performed += OnFlashCommand;
-
     }
     private void OnDisable()
     {
@@ -62,17 +65,28 @@ public class PlayerController : MonoBehaviour
         _inputActions.Player.Flash.performed -= OnFlashCommand;
         _inputActions.Player.MouseMove.Disable();
         _inputActions.Player.Flash.Disable();
+        _inputActions.Player.Pause.Disable();
     }
 
     //User Input Handling
+
+    public void OnPauseCommand(InputAction.CallbackContext context)
+    {
+        if (!_canRecieveInput) return;
+
+        _canRecieveInput = false;
+        GameManager.Instance.PauseGame();
+    }
+
     public void OnMoveCommand(InputAction.CallbackContext context)
     {
+        if (!_canRecieveInput) return;
         playerMovementHandler.Move();
     }
 
-
     public void OnFlashCommand(InputAction.CallbackContext context)
     {
+        if (!_canRecieveInput) return;
         playerFlashHandler.Flash();
     }
 
@@ -88,7 +102,10 @@ public class PlayerController : MonoBehaviour
         GainScore(PlayerSettings.PowerUpScore);
         OnPlayerPowerUp.Invoke(effect);
     }
-
+    private void HandleResumeGame()
+    {
+        _canRecieveInput = true;
+    }
     private void HandleTimerTick(int secodns)
     {
         if(secodns%60 == 0) GainScore(PlayerSettings.TimerScore);
@@ -100,11 +117,13 @@ public class PlayerController : MonoBehaviour
         OnPlayerScoreGain.Invoke(_score);
     }
 
-
     private void PlayerDeath()
     {
         playerCollidor.enabled = false;
-        Debug.Log("PlayerDeath() triggered!");
+        _canRecieveInput = false;
+        GameManager.Instance.StopGameTimer();
+        GameManager.Instance.GameScore = _score;
+        StartCoroutine(MoveToGameOver());
     }
 
     private void HandleSlowTime(Effect effect)
@@ -119,5 +138,11 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.ChangeTimeScale(timeScale);
         yield return new WaitForSecondsRealtime(duration);
         GameManager.Instance.ChangeTimeScale(1f);
+    }
+
+    private IEnumerator MoveToGameOver()
+    {
+        yield return new WaitForSeconds(3f);
+        GameManager.Instance.ChangeScene(2);
     }
 }
