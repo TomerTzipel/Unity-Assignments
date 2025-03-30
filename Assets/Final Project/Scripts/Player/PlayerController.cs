@@ -100,6 +100,19 @@ public class PlayerController : MonoBehaviour
     public void ActivateEffect(Effect effect)
     {
         GainScore(PlayerSettings.PowerUpScore);
+
+        switch (effect.type)
+        {
+            case PowerUpType.Heal:
+                AudioManager.Instance.PlaySfx(SFX.Heal);
+                break;
+            case PowerUpType.SlowTime:
+                AudioManager.Instance.PlaySfx(SFX.SlowTime);
+                break;
+            case PowerUpType.Invulnerable:
+                AudioManager.Instance.PlaySfx(SFX.Invul);
+                break;
+        }
         OnPlayerPowerUp.Invoke(effect);
     }
     private void HandleResumeGame()

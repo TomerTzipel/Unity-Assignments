@@ -17,17 +17,17 @@ public class SliderManager : MonoBehaviour
 
         masterSlider.onValueChanged.AddListener(val =>
         {
-            AudioManager.Instance.ApplyVolume(AudioGroup.Master, val);
+            AudioManager.Instance.ApplyNewVolume(AudioGroup.Master, val);
         });
 
         musicSlider.onValueChanged.AddListener(val =>
         {
-            AudioManager.Instance.ApplyVolume(AudioGroup.Music, val);
+            AudioManager.Instance.ApplyNewVolume(AudioGroup.Music, val);
         });
 
         sfxSlider.onValueChanged.AddListener(val =>
         {
-            AudioManager.Instance.ApplyVolume(AudioGroup.SFX, val);
+            AudioManager.Instance.ApplyNewVolume(AudioGroup.SFX, val);
         });
     }
 }

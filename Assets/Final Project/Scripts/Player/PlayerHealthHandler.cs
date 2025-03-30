@@ -47,7 +47,12 @@ public class PlayerHealthHandler : PlayerHandlerScript
 
     private void TakeDamage(int damage)
     {
-        if (_isInvul) return;
+        if (_isInvul)
+        {
+            AudioManager.Instance.PlaySfx(SFX.Hit);
+            return;
+        }
+        
 
         _currentHP -= damage;
 
@@ -55,9 +60,16 @@ public class PlayerHealthHandler : PlayerHandlerScript
         {
             _currentHP = 0;
             meshRenderer.materials = deadMaterial;
+            AudioManager.Instance.PlaySfx(SFX.Death);
             OnPlayerDeath.Invoke();
         }
-        if(_currentHP != 0) ActivateInvul(PlayerSettings.InvulDuration);
+
+        if (_currentHP != 0)
+        {
+            ActivateInvul(PlayerSettings.InvulDuration);
+            AudioManager.Instance.PlaySfx(SFX.Damage);
+        }
+        
 
         OnPlayerHealthChange.Invoke(new HealthChangeArgs
         {

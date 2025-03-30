@@ -22,6 +22,7 @@ public class PlayerFlashHandler : PlayerHandlerScript
         OnPlayerFlash.Invoke();
         StartCoroutine(StartFlashCD(PlayerSettings.FlashCD));
         PlayFlashEffect();
+        AudioManager.Instance.PlaySfx(SFX.Flash);
 
         Vector3 position = transform.position;
         float distanceToPlayer = Vector3.Distance(Camera.main.transform.position, new Vector3(position.x, position.y - 1f, position.y));

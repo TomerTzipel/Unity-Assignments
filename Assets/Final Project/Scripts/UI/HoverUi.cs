@@ -16,7 +16,7 @@ public class HoverUi : MonoBehaviour, IPointerEnterHandler
         if (hoverClip == null || Time.time - lastPlayTime < cooldown)
             return;
 
-        AudioManager.Instance.PlaySfx(1, hoverClip, 1);
+        AudioManager.Instance.PlaySfx(SFX.Hover);
 
         lastPlayTime = Time.time;
     }
@@ -26,7 +26,7 @@ public class HoverUi : MonoBehaviour, IPointerEnterHandler
         if (hoverClip == null || Time.time - lastPressTime < pressCooldown)
             return;
 
-        AudioManager.Instance.PlaySfx(1, pressClip, 1);
+        AudioManager.Instance.PlaySfx(SFX.Press);
 
         lastPressTime = Time.time;
     }
