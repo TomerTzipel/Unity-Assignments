@@ -15,3 +15,4 @@ MonoBehaviour:
   <BulletPrefab>k__BackingField: {fileID: 7297902260981884418, guid: aacc0fa92f2be524fb218e0670cc8d35, type: 3}
   <MinFireRate>k__BackingField: 1
   <MaxFireRate>k__BackingField: 5
+  <PoolSize>k__BackingField: 5

@@ -45,8 +45,9 @@ public class BulletsManager : MonoBehaviour
         if (args.objectHit.CompareTag("Player"))
         {
             int damage = (int)(args.damage * _damageMultipler);
-            playerController.HitPlayer(damage);
-            Destroy(args.bullet.gameObject);
-        }     
+            playerController.HitPlayer(damage);     
+        }
+        args.bullet.gameObject.SetActive(false);
+        args.bullet.enabled = false;
     }
 }
