@@ -24,7 +24,8 @@ public class PlayerHealthHandler : PlayerHandlerScript
 
 
     //Fields:
-    private int _currentHP;
+    public int CurrentHP { get; private set; }
+
     private int _maxHP;
     private bool _isInvul = false;
     private Coroutine _invulCoroutine;
@@ -38,10 +39,11 @@ public class PlayerHealthHandler : PlayerHandlerScript
     void Awake()
     {
         _maxHP = PlayerSettings.MaxHP;
-        _currentHP = _maxHP;
+        CurrentHP = _maxHP;
 
         playerController.OnPlayerHit += TakeDamage;
         playerController.OnPlayerPowerUp += HandlePowerUp;
+        GameManager.Instance.OnLoadGame += HandleGameLoad;
     }
 
 
@@ -54,17 +56,17 @@ public class PlayerHealthHandler : PlayerHandlerScript
         }
         
 
-        _currentHP -= damage;
+        CurrentHP -= damage;
 
-        if (_currentHP <= 0)
+        if (CurrentHP <= 0)
         {
-            _currentHP = 0;
+            CurrentHP = 0;
             meshRenderer.materials = deadMaterial;
             AudioManager.Instance.PlaySfx(SFX.Death);
             OnPlayerDeath.Invoke();
         }
 
-        if (_currentHP != 0)
+        if (CurrentHP != 0)
         {
             ActivateInvul(PlayerSettings.InvulDuration);
             AudioManager.Instance.PlaySfx(SFX.Damage);
@@ -73,7 +75,7 @@ public class PlayerHealthHandler : PlayerHandlerScript
 
         OnPlayerHealthChange.Invoke(new HealthChangeArgs
         {
-            currentHealth = _currentHP,
+            currentHealth = CurrentHP,
             maxHealth = _maxHP,
             wasHealthLost = true
         });
@@ -96,16 +98,16 @@ public class PlayerHealthHandler : PlayerHandlerScript
 
     private void Heal(int value)
     {
-        _currentHP += value;
+        CurrentHP += value;
 
-        if (_currentHP > _maxHP)
+        if (CurrentHP > _maxHP)
         {
-            _currentHP = _maxHP;
+            CurrentHP = _maxHP;
         }
 
         OnPlayerHealthChange.Invoke(new HealthChangeArgs
         {
-            currentHealth = _currentHP,
+            currentHealth = CurrentHP,
             maxHealth = _maxHP,
             wasHealthLost = false
         });
@@ -126,5 +128,11 @@ public class PlayerHealthHandler : PlayerHandlerScript
         yield return new WaitForSeconds(duration);
         meshRenderer.materials = regularMaterial;
         _isInvul = false;
+    }
+
+    private void HandleGameLoad(SaveData data)
+    {
+        CurrentHP = data.playerSaveData.playerHP;
+        OnPlayerHealthChange.Invoke(new HealthChangeArgs { currentHealth = CurrentHP, maxHealth = _maxHP,wasHealthLost = false});
     }
 }

@@ -9,7 +9,7 @@ public class GameOverManager : MonoBehaviour
 
     private void Awake()
     {
-        _scoreText.text = $"Score - {GameManager.Instance.GameScore}";
+        _scoreText.text = $"Score - {GameManager.Instance.GameEndScore}";
         int seconds = GameManager.Instance.TimerSeconds % 60;
         int minutes = GameManager.Instance.TimerSeconds / 60;
         _timeText.text = $"TIME - {minutes}:{seconds}";

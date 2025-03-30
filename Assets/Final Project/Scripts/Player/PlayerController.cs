@@ -39,15 +39,18 @@ public class PlayerController : MonoBehaviour
         _inputActions = new InputSystem_Actions();
         GameManager.Instance.OnGameTimerTick += HandleTimerTick;
         GameManager.Instance.OnGameResume += HandleResumeGame;
+        GameManager.Instance.OnSaveGame += HandleGameSave;
+        GameManager.Instance.OnLoadGame += HandleGameLoad;
         OnPlayerDeath += PlayerDeath;
         OnPlayerDeath += playerMovementHandler.StopMoving;
         OnPlayerFlash += playerMovementHandler.StopMoving;
         OnPlayerPowerUp += HandleSlowTime;
-       _score = 0;
+        _score = 0;
     }
     private void Start()
     {
-        GameManager.Instance.StartGameTimer();
+        //Should be in awake, no time to deal with competitions on awake
+        GameManager.Instance.StartGame();
     }
 
     private void OnEnable()
@@ -135,7 +138,11 @@ public class PlayerController : MonoBehaviour
         playerCollidor.enabled = false;
         _canRecieveInput = false;
         GameManager.Instance.StopGameTimer();
-        GameManager.Instance.GameScore = _score;
+        GameManager.Instance.GameEndScore = _score;
+
+        //Forcing the save to be unavailable, if there was one
+        PlayerPrefs.SetInt("DoesSaveExist", 0);
+
         StartCoroutine(MoveToGameOver());
     }
 
@@ -157,5 +164,26 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         GameManager.Instance.ChangeScene(2);
+    }
+
+    private void HandleGameSave()
+    {
+        PlayerSaveData data = new PlayerSaveData
+        {
+            playerHP = playerHealthHandler.CurrentHP,
+            playerScore = _score,
+            playerX = transform.position.x,
+            playerZ = transform.position.z
+        };
+
+        GameManager.Instance.GameSaveData.playerSaveData = data;
+    }
+
+    private void HandleGameLoad(SaveData data)
+    {
+        _score = data.playerSaveData.playerScore;
+        OnPlayerScoreGain.Invoke(_score);
+
+        NavMeshAgent.Warp(new Vector3(data.playerSaveData.playerX, transform.position.y, data.playerSaveData.playerZ));
     }
 }

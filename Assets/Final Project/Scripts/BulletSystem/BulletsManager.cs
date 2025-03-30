@@ -7,12 +7,15 @@ public class BulletsManager : MonoBehaviour
     [SerializeField] private List<ShooterHandler> shooters;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private int damageMultiplerBuffInterval;
+    [SerializeField] private int damageMultiplerBuff;
 
     //Fields:
     private float _damageMultipler;
 
     private void Awake()
     {
+        GameManager.Instance.OnLoadGame += HandleLoadGame;
+
         _damageMultipler = 1f;
 
         foreach (ShooterHandler shooter in shooters)
@@ -32,7 +35,7 @@ public class BulletsManager : MonoBehaviour
 
         if (time % damageMultiplerBuffInterval != 0) return;
 
-        _damageMultipler += 0.1f;
+        _damageMultipler += damageMultiplerBuff;
     }
 
     private void OnBulletSpawn(BulletHandler bullet)
@@ -49,5 +52,11 @@ public class BulletsManager : MonoBehaviour
         }
         args.bullet.gameObject.SetActive(false);
         args.bullet.enabled = false;
+    }
+
+    private void HandleLoadGame(SaveData data)
+    {
+        int numberOfBuffs = data.gameTime / damageMultiplerBuffInterval;
+        _damageMultipler += numberOfBuffs * damageMultiplerBuff;
     }
 }

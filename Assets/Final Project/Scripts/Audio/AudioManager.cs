@@ -18,6 +18,8 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] public AudioMixer audioMixer;
     [SerializeField] public AudioSourcePool sfxPool;
+
+    [Header("SFX")]
     [SerializeField] public AudioClip deathSFX;
     [SerializeField] public AudioClip hitSFX;
     [SerializeField] public AudioClip flashSFX;
@@ -41,6 +43,9 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.OnLoadGame += HandleGameLoad;
+        GameManager.Instance.OnSaveGame += HandleGameSave;
+
         ApplyVolume(AudioGroup.Master, PlayerPrefs.GetFloat("MasterVolume", 1f));
         ApplyVolume(AudioGroup.Music, PlayerPrefs.GetFloat("MusicVolume", 1f));
         ApplyVolume(AudioGroup.SFX, PlayerPrefs.GetFloat("SFXVolume", 1f));
@@ -112,5 +117,30 @@ public class AudioManager : MonoBehaviour
     private void PlaySfx(float volume, AudioClip audio, float pitch)
     {
         sfxPool.PlaySound(volume, audio, pitch);
+    }
+
+    private void HandleGameSave()
+    {
+        float masterVolume,musicVolume,sfxVolume;
+        audioMixer.GetFloat(AudioGroup.Master.ToString(), out masterVolume);
+        audioMixer.GetFloat(AudioGroup.Music.ToString(), out musicVolume);
+        audioMixer.GetFloat(AudioGroup.SFX.ToString(), out sfxVolume);
+
+        AudioSaveData data = new AudioSaveData
+        {
+            masterVolume = masterVolume,
+            musicVolume = musicVolume,
+            sfxVolume = sfxVolume
+        };
+
+        GameManager.Instance.GameSaveData.audioSaveData = data;
+    }
+    private void HandleGameLoad(SaveData data)
+    {
+        audioMixer.SetFloat(AudioGroup.Master.ToString(), data.audioSaveData.masterVolume);
+        audioMixer.SetFloat(AudioGroup.Music.ToString(), data.audioSaveData.musicVolume);
+        audioMixer.SetFloat(AudioGroup.SFX.ToString(), data.audioSaveData.sfxVolume);
+
+        //Ok I will admit, I am cheating here and letting the playerPrefs system to update the sliders :P
     }
 }

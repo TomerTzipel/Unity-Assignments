@@ -20,6 +20,7 @@ public class HUDManager : MonoBehaviour
     {
         GameManager.Instance.OnGameTimerTick += UpdateTimer;
         GameManager.Instance.OnGamePause += OpenPauseMenu;
+        GameManager.Instance.OnLoadGame += HandleLoadGame;
 
         hpBar.UpdateSlider(1f, playerController.PlayerSettings.MaxHP, playerController.PlayerSettings.MaxHP);
         playerController.OnPlayerHealthChange += OnPlayerHealthChange;
@@ -60,5 +61,8 @@ public class HUDManager : MonoBehaviour
         PauseMenu.SetActive(true);
     }
 
-    
+    private void HandleLoadGame(SaveData data)
+    {
+        UpdateTimer(data.gameTime);
+    }
 }
