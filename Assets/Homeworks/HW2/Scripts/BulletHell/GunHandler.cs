@@ -21,6 +21,7 @@ namespace HW2
         private IEnumerator FireCooldown()
         {
             yield return new WaitForSeconds(_fireRate);
+            _fireRate = Random.Range(gunSettings.MinFireRate, gunSettings.MaxFireRate);
             Fire();
             StartCoroutine(FireCooldown());
         }
