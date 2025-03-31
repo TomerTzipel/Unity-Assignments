@@ -1,23 +1,39 @@
 Submitted by Tomer Tzipel, Ivgeny Fleishman & Itay Cohen,
 
-Final Projcet:
+Final Projcet: 
 
+Musts:
+* Prefab Variant - The Power ups prefabs are created from a variant. (Itay)
+* Save/Load - Every minute the game saves which will allow you to continue from the main menu, if you die on a save the game will not allow you to use that save. (Tomer)
+  The game saves:
+    * Player HP
+    * Player position
+    * Player score
+    * The game's time
+    * Audio Settings
+ 
+Base:
+* Coroutines - Are used in many spots in the code. Mostly as cooldown timers, the game timer and the charge timer.
+* Scriptable Objects - Are used for every thign that has some form of stats or settings. The player, bullets, shooters etc.
+* Unity/C# Events - Used in many places. For example: events can be seen alot in the player controller/handlers communication and the bullet to player for damage.
+* Player prefs - Are used to save the audio settings for the audio mixer (Ivgeni). Is used to check if the save is useable or not (Tomer).
+* Animator - The player has animation on a 3D model brought from mixamo (Tomer & Itay)
+* Transform Movement - The bullets and the obstacle move with transform.Translate (Tomer)
+* NavMesh - The player uses using nav. The player clicks on the map, a ray is sent and the player moves to it. The flash also uses the navMeshAgent.Warp (Tomer)
+* UI - There is alot. Menus(Ivgeni), HUD(Tomer).
 
+Advanced:
+* New Input System - LMB, F and ESC are detected using the new input system and the data transfers using C# Events. (Tomer)
+* Complex Animator - Movement is blended in a tree blend (idle walking running, though it is hard to see in the game due to the perspective), the hurt animation is layered and masked to only be on the upper body.(Tomer) Death animation state has a behavior to start a blood particle effect on the player when entering the state (Itay)
+* Audio Mixer - All audio passes through an audio mixer in the audio manager (Ivgeni)
 
+Ivgeni - Menus, Audio Mixer and all the tech art stuff.
+Itay - The power ups system, particle effects, Death animation.
+Tomer - Player system, Bullets/shooters system, HUD, rest of the animator.
 
+The code from the homeworks is still in the project if you would like to compare, as some of it was overhauled for the actual submission. (Thought I can't assure the HW scenes will function).
 
-
-
-
-
-
-
-
-
-
-
-
-
+Thank you very much, the team.
 
 
 
