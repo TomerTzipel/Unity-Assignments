@@ -27,6 +27,7 @@ Advanced:
 * Complex Animator - Movement is blended in a tree blend (idle walking running, though it is hard to see in the game due to the perspective), the hurt animation is layered and masked to only be on the upper body.(Tomer) Death animation state has a behavior to start a blood particle effect on the player when entering the state (Itay)
 * Audio Mixer - All audio passes through an audio mixer in the audio manager (Ivgeni)
 
+Contributions:
 * Ivgeni - Menus, Audio Mixer and all the tech art stuff.
 * Itay - The power ups system, particle effects, Death animation.
 * Tomer - Player system, Bullets/shooters system, HUD, rest of the animator.
