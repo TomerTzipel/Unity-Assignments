@@ -2,6 +2,11 @@ Submitted by Tomer Tzipel, Ivgeny Fleishman & Itay Cohen,
 
 Final Projcet: 
 
+Controls:
+* Moving with RMB on the platform
+* Flash with F
+* Pause Menu with ESC
+
 Musts:
 * Prefab Variant - The Power ups prefabs are created from a variant. (Itay)
 * Save/Load - Every minute the game saves which will allow you to continue from the main menu, if you die on a save the game will not allow you to use that save. (Tomer)
